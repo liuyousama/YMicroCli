@@ -30,7 +30,7 @@ func init()  {
 	Register("directory_generator", directoryGenerator)
 }
 
-func (g *DirectoryGenerator) Generate(opt *Option) (err error) {
+func (g *DirectoryGenerator) Generate(opt *Option, services []*ServiceInfo) (err error) {
 	for _, v := range g.fileList {
 		err =  os.MkdirAll(path.Join(opt.OutputFilePath,v), 0755)
 		if err != nil {
