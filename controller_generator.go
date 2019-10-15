@@ -3,13 +3,12 @@ package main
 import (
 	"fmt"
 	"github.com/emicklei/proto"
-	"html/template"
 	"os"
 	"path/filepath"
+	"text/template"
 )
 
 type ControllerGenerator struct {
-
 }
 
 func init() {
@@ -18,15 +17,15 @@ func init() {
 	Register("controller_generator", controllerGenerator)
 }
 
-func (g *ControllerGenerator) Generate(opt *Option, services *ServiceInfo) (err error) {
+func (g *ControllerGenerator) Generate(opt *Option, service *ServiceInfo) (err error) {
 	var file *os.File
-	defer func() {_ = file.Close()}()
+	defer func() { _ = file.Close() }()
 
-	for _, rpc := range services.Rpcs {
+	for _, rpc := range service.Rpcs {
 		//打开（创建）控制器文件
 		file, err = os.OpenFile(
-			filepath.Join(opt.OutputFilePath,"controller", rpc.Name),
-			os.O_TRUNC|os.O_CREATE|os.O_WRONLY,0755)
+			filepath.Join(opt.OutputFilePath, "controller", rpc.Name),
+			os.O_TRUNC|os.O_CREATE|os.O_WRONLY, 0755)
 
 		if err != nil {
 			err = fmt.Errorf("Create contoller file %s.go failed: %v. ", rpc.Name, err)
@@ -41,7 +40,7 @@ func (g *ControllerGenerator) Generate(opt *Option, services *ServiceInfo) (err 
 		}
 
 		var templateVar = struct {
-			rpc *proto.RPC
+			rpc    *proto.RPC
 			module string
 		}{rpc, opt.ProjectModule}
 		err = t.Execute(file, templateVar)

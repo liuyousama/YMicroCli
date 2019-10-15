@@ -43,6 +43,12 @@ func GenerateAll(opt *Option) (err error) {
 		return err
 	}
 
+	//生成路由文件
+	err = generators.generator["router_generator"].Generate(opt, service)
+	if err != nil {
+		return err
+	}
+
 	//
 
 	return
