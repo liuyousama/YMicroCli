@@ -65,6 +65,9 @@ func GenerateAll(opt *Option) (err error) {
 }
 
 func parseProtoFile(opt *Option) (service *ServiceInfo, err error) {
+	var file *os.File
+	defer func() {_ = file.Close()}()
+
 	service = new(ServiceInfo)
 	fileInfo, err := os.Stat(opt.ProtoFilePath)
 	if err != nil {
@@ -78,14 +81,15 @@ func parseProtoFile(opt *Option) (service *ServiceInfo, err error) {
 		if fileInfo.Name()[strings.LastIndex(fileInfo.Name(), "."):] != "proto" {
 			err = fmt.Errorf("File %s is not a proto file. ", opt.ProtoFilePath)
 		}
-		file, err := os.Open(opt.ProtoFilePath)
+		file, err = os.Open(opt.ProtoFilePath)
 		if err != nil {
 			err = fmt.Errorf("Open file %s failed: %v. ", opt.ProtoFilePath, err)
 			return
 		}
 
 		parser := proto.NewParser(file)
-		p, err := parser.Parse()
+		var p *proto.Proto
+		p, err = parser.Parse()
 		if err != nil {
 			fmt.Printf("Parse file %s failed: %v", fileInfo.Name(), err)
 			return

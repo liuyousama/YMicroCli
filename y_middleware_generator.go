@@ -12,7 +12,7 @@ type MiddlewareTemplate struct {
 }
 
 func init()  {
-	Register("middle_template", new(MiddlewareTemplate))
+	Register("middleware_generator", new(MiddlewareTemplate))
 }
 
 func (*MiddlewareTemplate) Generate(opt *Option, service *ServiceInfo) (err error) {

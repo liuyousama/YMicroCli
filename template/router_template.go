@@ -5,8 +5,8 @@ package router
 
 import (
 	"context"
-	"{{.module}}/controller"
-	"{{.module}}/pb"
+	"{{.Module}}/controller"
+	"{{.Module}}/pb"
 )
 
 type Router struct {

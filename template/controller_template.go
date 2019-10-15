@@ -5,21 +5,21 @@ package controller
 
 import (
 	"context"
-	"{{.module}}/pb"
+	"{{.Module}}/pb"
 )
 
-type {{.rpc.Name}}Controller struct {
+type {{.Rpc.Name}}Controller struct {
 	
 }
 
-func (*{{.rpc.Name}}Controller)Validate(
-	ctx context.Context, param *pb.{{.rpc.RequestType}}) error {
+func (*{{.Rpc.Name}}Controller)Validate(
+	ctx context.Context, param *pb.{{.Rpc.RequestType}}) error {
 
 	return nil
 }
 
-func (*{{.rpc.Name}}Controller)Serve(
-	ctx context.Context, param *pb.{{.rpc.RequestType}}) (*pb.{{rpc.ReturnsType}}, error) {
+func (*{{.Rpc.Name}}Controller)Serve(
+	ctx context.Context, param *pb.{{.Rpc.RequestType}}) (*pb.{{.Rpc.ReturnsType}}, error) {
 
 	return nil, nil
 }

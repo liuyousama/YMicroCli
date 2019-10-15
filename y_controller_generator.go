@@ -25,7 +25,7 @@ func (g *ControllerGenerator) Generate(opt *Option, service *ServiceInfo) (err e
 	for _, rpc := range service.Rpcs {
 		//打开（创建）控制器文件
 		file, err = os.OpenFile(
-			filepath.Join(opt.OutputFilePath, "controller", rpc.Name),
+			filepath.Join(opt.OutputFilePath, "controller", rpc.Name+".go"),
 			os.O_TRUNC|os.O_CREATE|os.O_WRONLY, 0755)
 
 		if err != nil {
@@ -41,8 +41,8 @@ func (g *ControllerGenerator) Generate(opt *Option, service *ServiceInfo) (err e
 		}
 
 		var templateVar = struct {
-			rpc    *proto.RPC
-			module string
+			Rpc    *proto.RPC
+			Module string
 		}{rpc, opt.ProjectModule}
 		err = t.Execute(file, templateVar)
 
