@@ -6,6 +6,7 @@ import (
 	"os"
 	"path/filepath"
 	"text/template"
+	code "ymicro-cli/template"
 )
 
 type ControllerGenerator struct {
@@ -33,7 +34,7 @@ func (g *ControllerGenerator) Generate(opt *Option, service *ServiceInfo) (err e
 		}
 		//渲染到文件
 		t := template.New("controller")
-		t, err = t.Parse(controllerTemplate)
+		t, err = t.Parse(code.ControllerTemplate)
 		if err != nil {
 			err = fmt.Errorf("Render controller %s failed: %v. ", rpc.Name, err)
 			return

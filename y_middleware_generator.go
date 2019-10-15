@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"os"
 	"path/filepath"
+	code "ymicro-cli/template"
 )
 
 type MiddlewareTemplate struct {
@@ -25,7 +26,7 @@ func (*MiddlewareTemplate) Generate(opt *Option, service *ServiceInfo) (err erro
 		return
 	}
 
-	_, err = fmt.Fprint(file, middlewareCode)
+	_, err = fmt.Fprint(file, code.MiddlewareCode)
 	if err != nil {
 		err = fmt.Errorf("Write code to middleware file failed: %v. ", err)
 		return

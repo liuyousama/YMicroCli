@@ -1,6 +1,6 @@
-package main
+package template
 
-var controllerTemplate = `
+var ControllerTemplate = `
 package controller
 
 import (

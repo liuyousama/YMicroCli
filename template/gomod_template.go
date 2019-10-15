@@ -1,6 +1,6 @@
-package main
+package template
 
-var gomodTemplate = `
+var GomodTemplate = `
 module {{.}}
 
 go 1.12

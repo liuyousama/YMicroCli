@@ -1,7 +1,7 @@
-package main
+package template
 
 
-var mainTemplate = `
+var MainTemplate = `
 package main
 import(
 	"github.com/grpc/grpc-go"

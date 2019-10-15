@@ -1,6 +1,6 @@
-package main
+package template
 
-var routerTemplate = `
+var RouterTemplate = `
 package router
 
 import (

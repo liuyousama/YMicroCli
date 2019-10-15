@@ -1,6 +1,6 @@
-package main
+package template
 
-var middlewareCode = `
+var MiddlewareCode = `
 package middleware
 
 import (

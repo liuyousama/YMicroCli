@@ -5,6 +5,7 @@ import (
 	"os"
 	"path/filepath"
 	"text/template"
+	code "ymicro-cli/template"
 )
 
 type RouterGenerator struct {
@@ -25,7 +26,7 @@ func (*RouterGenerator) Generate(opt *Option, service *ServiceInfo) (err error) 
 	defer func() {_ = file.Close()}()
 
 	t := template.New("router")
-	t, err = t.Parse(routerTemplate)
+	t, err = t.Parse(code.RouterTemplate)
 	if err != nil {
 		err = fmt.Errorf("Render router failed: %v. ", err)
 		return
