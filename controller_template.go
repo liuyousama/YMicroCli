@@ -5,16 +5,22 @@ package controller
 
 import (
 	"context"
-	""
+	"{{.module}}/pb"
 )
 
-type {{.Service.Name}} struct {}
-
-{{range .Rpcs}}
-func (s *{{$.Service.Name}}) {{.Name}}(
-	ctx context.Context, request *pb.{{.RequestType}}) (*pb.ReturnsType, error) {
-
-    return
+type {{.rpc.Name}}Controller struct {
+	
 }
-{{end}}
+
+func (*{{.rpc.Name}}Controller)Validate(
+	ctx context.Context, param *pb.{{.rpc.RequestType}}) error {
+
+	return nil
+}
+
+func (*{{.rpc.Name}}Controller)Serve(
+	ctx context.Context, param *pb.{{.rpc.RequestType}}) (*pb.{{rpc.ReturnsType}}, error) {
+
+	return nil, nil
+}
 `

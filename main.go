@@ -25,10 +25,11 @@ func main()  {
 			Usage:"指定框架代码生成的位置，默认为当前目录下的micro_output文件夹",
 			Destination:&opt.OutputFilePath,
 		},
-		cli.BoolFlag{
-			Name:"c",
-			Usage:"指定框架生成client端代码(默认生成server端代码)",
-			Destination:&opt.IsClient,
+		cli.StringFlag{
+			Name:"m",
+			Value:"micro",
+			Usage:"指定生成的工程的模块名，默认为micro",
+			Destination:&opt.ProjectModule,
 		},
 	}
 

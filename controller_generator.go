@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"github.com/emicklei/proto"
 	"html/template"
 	"os"
 	"path/filepath"
@@ -17,27 +18,36 @@ func init() {
 	Register("controller_generator", controllerGenerator)
 }
 
-func (g *ControllerGenerator) Generate(opt *Option, services []*ServiceInfo) (err error) {
-	for _, service := range services {
+func (g *ControllerGenerator) Generate(opt *Option, services *ServiceInfo) (err error) {
+	var file *os.File
+	defer func() {_ = file.Close()}()
+
+	for _, rpc := range services.Rpcs {
 		//打开（创建）控制器文件
-		file, err := os.OpenFile(
-			filepath.Join(opt.OutputFilePath,"controller",service.Service.Name+".go"),
-			os.O_TRUNC|os.O_CREATE|os.O_WRONLY, 0755)
-		defer file.Close()
+		file, err = os.OpenFile(
+			filepath.Join(opt.OutputFilePath,"controller", rpc.Name),
+			os.O_TRUNC|os.O_CREATE|os.O_WRONLY,0755)
+
 		if err != nil {
-			fmt.Printf("Create contoller file %s.go failed: %v", service.Service.Name, err)
+			err = fmt.Errorf("Create contoller file %s.go failed: %v. ", rpc.Name, err)
 			return
 		}
 		//渲染到文件
-		t := template.New("main")
-		t, err = t.Parse(mainTemplate)
+		t := template.New("controller")
+		t, err = t.Parse(controllerTemplate)
 		if err != nil {
-			fmt.Printf("Render controller %s failed: %v", service.Service.Name, err)
+			err = fmt.Errorf("Render controller %s failed: %v. ", rpc.Name, err)
 			return
 		}
-		err = t.Execute(file, service)
+
+		var templateVar = struct {
+			rpc *proto.RPC
+			module string
+		}{rpc, opt.ProjectModule}
+		err = t.Execute(file, templateVar)
+
 		if err != nil {
-			fmt.Printf("Write code to controller %s failed: %v", service.Service.Name, err)
+			err = fmt.Errorf("Write code to controller %s failed: %v. ", rpc.Name, err)
 			return
 		}
 

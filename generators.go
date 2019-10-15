@@ -8,7 +8,7 @@ import (
 )
 
 type Generator interface {
-	Generate(opt *Option, services []*ServiceInfo) error
+	Generate(opt *Option, services *ServiceInfo) error
 }
 
 type Generators struct {
@@ -32,13 +32,13 @@ func GenerateAll(opt *Option) (err error) {
 	}
 
 	//解析proto文件
-	services, err := parseProtoFile(opt)
+	service, err := parseProtoFile(opt)
 	if err != nil {
 		return err
 	}
 
 	//生成控制器文件
-	err = generators.generator["controller_generator"].Generate(opt, services)
+	err = generators.generator["controller_generator"].Generate(opt, service)
 	if err != nil {
 		return err
 	}
@@ -82,6 +82,8 @@ func parseProtoFile(opt *Option) (service *ServiceInfo, err error) {
 		)
 	}
 
+	service.Module = opt.ProjectModule
+
 	return
 }
 
@@ -89,6 +91,7 @@ type ServiceInfo struct {
 	Service  *proto.Service
 	Rpcs     []*proto.RPC
 	Messages []*proto.Message
+	Module   string
 }
 
 func (s *ServiceInfo) handleService(service *proto.Service)  {
