@@ -49,6 +49,12 @@ func GenerateAll(opt *Option) (err error) {
 		return err
 	}
 
+	//生成中间件文件
+	err = generators.generator["middleware_generator"].Generate(opt, service)
+	if err != nil {
+		return err
+	}
+
 	//
 
 	return
