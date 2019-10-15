@@ -20,7 +20,7 @@ func (*MainGenerator)Generate(opt *Option, service *ServiceInfo) (err error) {
 	var file *os.File
 	defer func() {_ = file.Close()}()
 
-	file, err = os.OpenFile(filepath.Join(opt.OutputFilePath,"main","main.go"),
+	file, err = os.OpenFile(filepath.Join(opt.OutputFilePath,"main.go"),
 		os.O_CREATE|os.O_TRUNC|os.O_WRONLY, 0755)
 	if err != nil {
 		err = fmt.Errorf("Create main file failed: %v. ", err)

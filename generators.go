@@ -61,6 +61,12 @@ func GenerateAll(opt *Option) (err error) {
 		return err
 	}
 
+	//生成Dockerfile文件
+	err = generators.generator["dockerfile_generator"].Generate(opt, service)
+	if err != nil {
+		return err
+	}
+
 	return
 }
 

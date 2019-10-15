@@ -9,9 +9,7 @@ import (
 var AllDirectoryList = []string{
 	"controller",
 	"pb",
-	"main",
 	"infra",
-	"scripts",
 	"model",
 	"config",
 	"router",
