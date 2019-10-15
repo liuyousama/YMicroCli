@@ -3,8 +3,8 @@ package main
 import (
 	"fmt"
 	"github.com/emicklei/proto"
-	"io/ioutil"
 	"os"
+	"strings"
 )
 
 type Generator interface {
@@ -48,46 +48,23 @@ func GenerateAll(opt *Option) (err error) {
 	return
 }
 
-func parseProtoFile(opt *Option) (services []*ServiceInfo, err error) {
-	services = make([]*ServiceInfo, 0)
+func parseProtoFile(opt *Option) (service *ServiceInfo, err error) {
+	service = new(ServiceInfo)
 	fileInfo, err := os.Stat(opt.ProtoFilePath)
 	if err != nil {
-		fmt.Printf("Check file %s failed: %v\n", opt.ProtoFilePath, err)
+		err = fmt.Errorf("Check file %s failed: %v\n", opt.ProtoFilePath, err)
+		return
 	}
 	if fileInfo.IsDir() {
-		fileList, err := ioutil.ReadDir(opt.ProtoFilePath)
-		if err != nil {
-			fmt.Printf("Open directory %s failed: %v\n", opt.ProtoFilePath, err)
-			return
-		}
-		for _, fileInfo := range fileList {
-			file, err := os.Open(fileInfo.Name())
-			if err != nil {
-				fmt.Printf("Open file %s failed: %v", fileInfo.Name(), err)
-				return
-			}
-
-			parser := proto.NewParser(file)
-			p, err := parser.Parse()
-			if err != nil {
-				fmt.Printf("Parse file %s failed: %v", fileInfo.Name(), err)
-				return
-			}
-
-			service := new(ServiceInfo)
-
-			proto.Walk(p,
-				proto.WithService(service.handleService),
-				proto.WithRPC(service.handleRpc),
-				proto.WithMessage(service.handlerMessage),
-			)
-
-			services = append(services, service)
-		}
+		err = fmt.Errorf("File %s is not a proto file, but a directory. ", opt.ProtoFilePath)
+		return
 	}else {
+		if fileInfo.Name()[strings.LastIndex(fileInfo.Name(), "."):] != "proto" {
+			err = fmt.Errorf("File %s is not a proto file. ", opt.ProtoFilePath)
+		}
 		file, err := os.Open(opt.ProtoFilePath)
 		if err != nil {
-			fmt.Printf("Open file %s failed: %v", opt.ProtoFilePath, err)
+			err = fmt.Errorf("Open file %s failed: %v. ", opt.ProtoFilePath, err)
 			return
 		}
 
@@ -98,15 +75,11 @@ func parseProtoFile(opt *Option) (services []*ServiceInfo, err error) {
 			return
 		}
 
-		service := new(ServiceInfo)
-
 		proto.Walk(p,
 			proto.WithService(service.handleService),
 			proto.WithRPC(service.handleRpc),
 			proto.WithMessage(service.handlerMessage),
 		)
-
-		services = append(services, service)
 	}
 
 	return

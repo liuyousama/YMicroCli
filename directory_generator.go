@@ -6,16 +6,15 @@ import (
 	"path"
 )
 
-var AllDirectoryList []string = []string{
+var AllDirectoryList = []string{
 	"controller",
-	"proto",
+	"pb",
 	"main",
 	"scripts",
 	"model",
 	"config",
-	"app/router",
-	"app/config",
-	"grpc",
+	"router",
+	"middleware",
 }
 
 type DirectoryGenerator struct {
