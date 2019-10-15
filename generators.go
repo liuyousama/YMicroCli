@@ -55,7 +55,11 @@ func GenerateAll(opt *Option) (err error) {
 		return err
 	}
 
-	//
+	//生成main文件
+	err = generators.generator["main_generator"].Generate(opt, service)
+	if err != nil {
+		return err
+	}
 
 	return
 }
