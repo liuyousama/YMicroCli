@@ -13,7 +13,7 @@ type {{.Rpc.Name}}Controller struct {
 }
 
 func (*{{.Rpc.Name}}Controller)Validate(
-	ctx context.Context, param *pb.{{.Rpc.RequestType}}) error {
+	ctx context.Context, param *pb.{{.Rpc.RequestType}}) (*pb.{{.Rpc.ReturnsType}}, error) {
 
 	return nil
 }

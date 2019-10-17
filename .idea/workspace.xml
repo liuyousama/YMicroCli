@@ -1,14 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="e97205d5-50be-4d51-9267-30671cc6b58c" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/generators.go" beforeDir="false" afterPath="$PROJECT_DIR$/generators.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/go.mod" beforeDir="false" afterPath="$PROJECT_DIR$/go.mod" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/go.sum" beforeDir="false" afterPath="$PROJECT_DIR$/go.sum" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/y_directory_generator.go" beforeDir="false" afterPath="$PROJECT_DIR$/y_directory_generator.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/y_main_generator.go" beforeDir="false" afterPath="$PROJECT_DIR$/y_main_generator.go" afterDir="false" />
-    </list>
+    <list default="true" id="e97205d5-50be-4d51-9267-30671cc6b58c" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -146,11 +139,6 @@
             </path>
             <path>
               <item name="YmicroCli" type="b2602c69:ProjectViewProjectNode" />
-              <item name="YmicroCli" type="462c0819:PsiDirectoryNode" />
-              <item name="template" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="YmicroCli" type="b2602c69:ProjectViewProjectNode" />
               <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
             </path>
           </expand>
@@ -204,7 +192,7 @@
       <window_info anchor="bottom" id="Version Control" order="8" />
       <window_info anchor="bottom" id="Database Changes" order="9" />
       <window_info anchor="bottom" id="Statistic" order="10" sideWeight="0.49928263" weight="0.32971016" />
-      <window_info anchor="bottom" id="Terminal" order="11" sideWeight="0.49928263" weight="0.32971016" />
+      <window_info anchor="bottom" id="Terminal" order="11" sideWeight="0.49928263" visible="true" weight="0.32971016" />
       <window_info anchor="bottom" id="Event Log" order="12" sideWeight="0.50071734" side_tool="true" weight="0.32971016" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
