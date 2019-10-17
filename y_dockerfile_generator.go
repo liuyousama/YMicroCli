@@ -41,7 +41,7 @@ FROM golang:latest
 #作者
 MAINTAINER liuyousama "634308664@qq.com"
 #设置go mod以及proxy相关
-ENV GOPROXY https://goproxy.io
+ENV GOPROXY https://mirrors.aliyun.com/goproxy/
 ENV GO111MODULE on
 
 #将服务器的go工程代码加入到docker容器中
